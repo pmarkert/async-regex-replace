@@ -1,0 +1,28 @@
+{
+  "name": "async-regex-replace",
+  "version": "0.0.0",
+  "description": "regex replacements using asynchronous callback functions",
+  "homepage": "https://github.com/pmarkert/async-regex-replace/wiki",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "author": "Phillip Markert <phillip@ephisys.com>",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/pmarkert/async-regex-replace"
+  },
+  "bugs": "https://github.com/pmarkert/async-regex-replace/issues",
+  "keywords": [
+    "regex",
+    "async",
+    "asynchronous",
+    "replace",
+    "replacement"
+  ],
+  "license": "MIT",
+  "devDependencies": {
+    "mocha": "^2.2.5",
+    "should": "^7.0.1"
+  }
+}
