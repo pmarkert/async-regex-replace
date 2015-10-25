@@ -10,9 +10,12 @@ var replacers = {
 			cb("Unexpected match - " + match[0]);
 		}
 	},
-        reverse : function(match, cb) {
+	reverse : function(match, cb) {
 		cb(null, match[0].split('').reverse().join(''));
-        }
+	},
+	recurring : function(match, cb) {
+		cb(null, '[' + match[0] + '](' + match[0] + ')');
+	}
 }
 
 describe("async-regex-replace", function() {
@@ -67,6 +70,16 @@ describe("async-regex-replace", function() {
 			done);
 		});
 
+		it("single match, recurring replace", function(done) {
+			run_test({
+				regex : /match/g,
+				string : "This is the string to match.",
+				expected : "This is the string to [match](match).",
+				replacer : replacers.recurring
+			},
+			done);
+		});
+
 		it("multiple matches, simple replace, global flag missing", function(done) {
 			run_test({
 				regex : /match/,
@@ -83,6 +96,16 @@ describe("async-regex-replace", function() {
 				string : "The first should match and the second should match.",
 				expected : "The first should replace and the second should replace.",
 				replacer : replacers.simple
+			},
+			done);
+		});
+
+		it("multiple matches, recurring replace", function(done) {
+			run_test({
+				regex : /match/g,
+				string : "The first should match and the second should match.",
+				expected : "The first should [match](match) and the second should [match](match).",
+				replacer : replacers.recurring
 			},
 			done);
 		});
@@ -107,5 +130,15 @@ describe("async-regex-replace", function() {
 			done);
 
 		});
+
+		it("reusable replacer recurring", function(done) {
+			run_test( {
+				replacer: async_regex_replace.Replacer(/match/, replacers.recurring),
+				string : "This is the string to match.",
+				expected : "This is the string to [match](match).",
+			},
+			done);
+		});
+
 	});
 });

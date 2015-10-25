@@ -1,5 +1,3 @@
-var dns = require("dns");
-
 module.exports = {
 	replace : replace,
 	Replacer : Replacer
@@ -20,6 +18,7 @@ module.exports = {
  *
  */
 function replace(regex, str, replacer, done) {
+	regex.lastIndex = 0;
 	var match = regex.exec(str);
 	if(match==null) { // No matches, we are done.
 		done(null, str);
@@ -33,12 +32,15 @@ function replace(regex, str, replacer, done) {
 			var matchIndex = match.index;
 			var matchLength = match[0].length;
 			// Splice the replacement back into the string
-			var new_str = str.substring(0,matchIndex) + result + str.substring(matchIndex + matchLength);
+			var accum = str.substring(0,matchIndex) + result;
+			var rest = str.substring(matchIndex + matchLength);
 			if(regex.global) { // Keep replacing
-				replace(regex, new_str, replacer, done);
+				replace(regex, rest, replacer, function(err, remaining) {
+						done(err, accum + remaining);
+					});
 			}
 			else {
-				done(null, new_str);
+				done(null, accum + rest);
 			}
 		});
 	}
