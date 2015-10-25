@@ -28,5 +28,4 @@ arr.replace(/regex/g, "String with regex to replace", function(match, callback) 
 });
 ```
 
-NOTE: While this particular example does not actually use any asynchronous functionality in the replacement callback, 
-it should be apparent how asynchronous support is achieved via the callbacks.
+NOTE: In this particular example, the gratuitous use of setTimeout is just to demonstrate the asynchronous functionality in the replacement callback.
