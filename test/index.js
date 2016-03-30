@@ -3,18 +3,18 @@ var should = require("should");
 
 var replacers = {
 	simple : function(match, cb) {
-		if(match[0]==="match") {
+		if(match==="match") {
 			cb(null, "replace");
 		}
 		else {
-			cb("Unexpected match - " + match[0]);
+			cb("Unexpected match - " + match);
 		}
 	},
 	reverse : function(match, cb) {
-		cb(null, match[0].split('').reverse().join(''));
+		cb(null, match.split('').reverse().join(''));
 	},
 	recurring : function(match, cb) {
-		cb(null, '[' + match[0] + '](' + match[0] + ')');
+		cb(null, '[' + match + '](' + match + ')');
 	}
 }
 
@@ -108,6 +108,16 @@ describe("async-regex-replace", function() {
 				replacer : replacers.recurring
 			},
 			done);
+		});
+
+		it("should pass the matches to the replacer", function(done) {
+			async_regex_replace.replace(/foo (bar) (qar)/g, 'foo bar qar', function(match, bar, qar, cb) {
+				bar.should.equal('bar');
+				qar.should.equal('qar');
+				cb();
+			}, function() {
+				done();
+			});
 		});
 	});
 
