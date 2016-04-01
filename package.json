@@ -5,7 +5,8 @@
   "homepage": "https://github.com/pmarkert/async-regex-replace/wiki",
   "main": "index.js",
   "scripts": {
-    "test": "mocha"
+    "test": "mocha && mos t",
+    "md": "mos"
   },
   "author": "Phillip Markert <phillip@ephisys.com>",
   "repository": {
@@ -23,6 +24,7 @@
   "license": "MIT",
   "devDependencies": {
     "mocha": "^2.2.5",
+    "mos": "^0.7.1",
     "should": "^7.0.1"
   }
 }

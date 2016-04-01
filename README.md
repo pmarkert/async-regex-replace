@@ -10,8 +10,11 @@ match value to lookup a record in a database. In my case, I needed to perform DN
 with the returned host:port combination.
 
 ## Enter async-regex-replace
+
+<!--@example('./example.js')-->
 ``` js
-var arr = require("async-regex-replace");
+'use strict';
+var arr = require('async-regex-replace');
 
 arr.replace(/regex/g, "String with regex to replace", function(match, callback) {
   setTimeout(function() {
@@ -22,10 +25,11 @@ arr.replace(/regex/g, "String with regex to replace", function(match, callback) 
 }, function(err, final_result) {
   if(err) { console.log("Error - " + err); }
   else {
-    // Outputs: "String with xeger to replace"
     console.log(final_result);
+    //> String with xeger to replace
   }
 });
 ```
+<!--/@-->
 
 NOTE: In this particular example, the gratuitous use of setTimeout is just to demonstrate the asynchronous functionality in the replacement callback.
