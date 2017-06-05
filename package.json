@@ -1,6 +1,6 @@
 {
   "name": "async-regex-replace",
-  "version": "2.0.0",
+  "version": "3.0.0",
   "description": "regex replacements using asynchronous callback functions",
   "homepage": "https://github.com/pmarkert/async-regex-replace/wiki",
   "main": "index.js",
