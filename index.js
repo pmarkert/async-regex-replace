@@ -25,7 +25,7 @@ function replace(regex, str, replacer, done) {
 	}
 	else {
 		// Found a match, call the async replacer
-		replacer.apply(null, match.concat(function(err, result) {
+		var params = Array.of(function(err, result) {
 			if(err) { // If the replacer failed, callback and pass the error
 				return done(err, result);
 			}
@@ -42,7 +42,8 @@ function replace(regex, str, replacer, done) {
 			else {
 				done(null, accum + rest);
 			}
-		}));
+		});
+		replacer.apply(null, params.concat(match));
 	}
 }
 

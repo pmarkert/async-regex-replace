@@ -13,9 +13,9 @@ Perhaps you are using the matched value to lookup the replacement in a database.
 <!--@example('./example.js')-->
 ``` js
 'use strict';
-var arr = require('async-regex-replace');
+var async_regex_replace = require('async-regex-replace');
 
-arr.replace(/regex/g, "String with regex to replace", function(match, callback) {
+async_regex_replace.replace(/regex/g, "String with regex to replace", function(callback, match) {
   setTimeout(function() {
     var replacement_value = match.split('').reverse().join('');
     var err = null;
